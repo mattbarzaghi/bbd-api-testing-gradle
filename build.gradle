@@ -17,6 +17,23 @@ dependencies {
 
 }
 
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'html:reports/test-report', '--plugin', 'pretty', '--glue', 'steps', 'src/test/resources']
+        }
+    }
+}
+
 test {
     useJUnitPlatform()
 }

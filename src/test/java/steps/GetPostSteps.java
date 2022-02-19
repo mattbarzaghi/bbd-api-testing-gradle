@@ -19,7 +19,7 @@ public class GetPostSteps {
     @And("I perform GET for the post number {string}")
     public void iPerformGETForThePostNumber(String postNumber) {
         when().get(String.format("http://localhost:3000/posts/%s", postNumber))
-                .then().body("author", is("Matteo Barzaghi"))
+                .then().body("author", is("typicode"))
                 .and().statusCode(200);
     }
 
